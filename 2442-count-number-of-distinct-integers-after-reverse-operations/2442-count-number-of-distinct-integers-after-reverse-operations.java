@@ -1,25 +1,21 @@
 class Solution {
     public int countDistinctIntegers(int[] nums) {
        ArrayList<Integer> ar=new ArrayList<>();
-       for(int i=0;i<nums.length;i++){
-        ar.add(nums[i]);
+       for(int nan:nums){
+        ar.add(nan);
        } 
-       int sum=0;
-       for(int i=0;i<nums.length;i++){
-        
-        int rem=nums[i]%10;
+      
+       for(int i: nums){
+         int sum=0;
+         int temp=i;
+        while(temp>0){
+            int rem=temp%10;
         sum=(sum*10)+rem;
-        nums[i]=nums[i]/10;
-        ar.add(nums[i]);
-       }
-       int c=0;
-       
-        ArrayList<Integer> newList = new ArrayList<>();
-        for (int element : ar) {
-            if (!newList.contains(element)) { 
-                newList.add(element);
-            }
+        temp=temp/10;
         }
-       return newList.size();
+        ar.add(sum);
+       }
+      Set<Integer> distinctIntegers = new HashSet<>(ar);
+        return distinctIntegers.size();
     }
 }
