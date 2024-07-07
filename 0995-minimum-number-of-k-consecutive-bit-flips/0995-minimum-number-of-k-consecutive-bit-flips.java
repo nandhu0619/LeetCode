@@ -1,18 +1,19 @@
 class Solution {
     public int minKBitFlips(int[] nums, int k) {
-        int n = nums.length, flipped = 0, res = 0;
-        int[] isFlipped = new int[n];
-        for (int i = 0; i < nums.length; ++i) {
-            if (i >= k)
-                flipped ^= isFlipped[i - k];
-                if (flipped == nums[i]) {
-                    if (i + k > nums.length)
-                        return -1;
-                isFlipped[i] = 1;
-                flipped ^= 1;
-                res++;
+        int flip=0;
+        Queue<Integer>q=new LinkedList<>();
+        for(int i=0;i<nums.length;i++){
+            if(!q.isEmpty()&&q.peek()<=i-k){
+                q.poll();
+            }
+            if(q.size()%2==nums[i]){
+                if(i+k>nums.length){
+                    return -1;
+                }
+                flip++;
+                q.add(i);
             }
         }
-        return res;
+        return flip;
     }
 }
